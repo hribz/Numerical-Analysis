@@ -18,5 +18,5 @@
 <li>Matrix类实现方法：矩阵行变换、列变换、求行列式的值、求逆矩阵、求转置矩阵、求矩阵范数</li>
 </ul>
 <h3>测试方法：</h3>
-运行Test包中的类，SolEquationTest类对应解方程组，findEigenTest对应求特征方程和特征值
+<p>运行Test包中的类，SolEquationTest类对应解方程组，findEigenTest对应求特征方程和特征值</p>
 
