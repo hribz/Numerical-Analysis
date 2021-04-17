@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SolEquation.iml" filepath="$PROJECT_DIR$/SolEquation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Numerical-Analysis.iml" filepath="$PROJECT_DIR$/Numerical-Analysis.iml" />
     </modules>
   </component>
 </project>
