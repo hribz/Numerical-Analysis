@@ -13,37 +13,56 @@ new FormModel {
 					name: "operation"
 					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 						name: "scrollPane1"
-						add( new FormComponent( "javax.swing.JList" ) {
-							name: "list1"
-							"preferredSize": new java.awt.Dimension( 100, 62 )
+						"preferredSize": new java.awt.Dimension( 200, 502 )
+						add( new FormComponent( "javax.swing.JTree" ) {
+							name: "elementsList"
+							"visibleRowCount": 25
 						} )
 					} )
-					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
-						"$columnSpecs": "474"
-						"$rowSpecs": "305"
-						"$hGap": 10
-						"$vGap": 5
-						"$alignTop": true
-						"$alignLeft": true
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.intellij.uiDesigner.core.GridLayoutManager ) {
+						"$columnCount": 1
+						"$rowCount": 1
 					} ) {
 						name: "picture"
+						add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+							name: "scrollPane2"
+							add( new FormComponent( "javax.swing.JTextArea" ) {
+								name: "textArea1"
+								"requestFocusEnabled": false
+								"focusable": false
+								"editable": false
+							} )
+						}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
+							"fill": 3
+						} )
 					} )
 				}, new FormLayoutConstraints( class java.lang.String ) {
 					"value": "Center"
 				} )
 				add( new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
 					name: "menuBar1"
+					"border": new com.jformdesigner.model.SwingBorder( "MenuBar.border" )
 					add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
 						name: "addMatrix"
 						"text": "新建矩阵"
-						"icon": new com.jformdesigner.model.SwingIcon( 2, "FileChooser.listViewIcon" )
+						"icon": new com.jformdesigner.model.SwingIcon( 1, "C:\\Users\\Hershey\\Pictures\\ICON\\icon_矩阵填空.png" )
+						"border": new com.jformdesigner.model.SwingBorder( "DesktopIcon.border" )
+						"disabledIcon": sfield com.jformdesigner.model.FormObject NULL_VALUE
+						"disabledSelectedIcon": sfield com.jformdesigner.model.FormObject NULL_VALUE
 						addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "addMatrixMouseClicked", true ) )
 					} )
 					add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
 						name: "addFunction"
 						"text": "新建函数"
-						"icon": new com.jformdesigner.model.SwingIcon( 1, "C:\\Users\\Hershey\\Pictures\\function png icon.png" )
+						"icon": new com.jformdesigner.model.SwingIcon( 1, "D:\\JavaProject\\Numerical-Analysis\\icon\\function png icon.png" )
+						"border": new com.jformdesigner.model.SwingBorder( "DesktopIcon.border" )
 						addEvent( new FormEvent( "java.awt.event.MouseListener", "mouseClicked", "addFunctionMouseClicked", true ) )
+					} )
+					add( new FormContainer( "javax.swing.JMenu", new FormLayoutManager( class javax.swing.JMenu ) ) {
+						name: "help"
+						"text": "说明"
+						"icon": new com.jformdesigner.model.SwingIcon( 1, "D:\\JavaProject\\Numerical-Analysis\\icon\\help png icon.png" )
+						"border": new com.jformdesigner.model.SwingBorder( "DesktopIcon.border" )
 					} )
 				}, new FormLayoutConstraints( class java.lang.String ) {
 					"value": "North"
@@ -84,7 +103,7 @@ new FormModel {
 				"value": "Center"
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 35, 5 )
+			"location": new java.awt.Point( 0, 10 )
 			"size": new java.awt.Dimension( 595, 435 )
 		} )
 	}

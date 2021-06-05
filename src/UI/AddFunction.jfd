@@ -17,6 +17,7 @@ new FormModel {
 					name: "textPane1"
 					"preferredSize": new java.awt.Dimension( 300, 23 )
 					"minimumSize": new java.awt.Dimension( 300, 23 )
+					"toolTipText": "示例：x+1"
 				} )
 			}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.intellij.uiDesigner.core.GridLayoutManager ) {
