@@ -23,6 +23,11 @@ import mathElements.Matrix;
  * @author Brainrain
  */
 public class UI extends JFrame {
+    public UI(String name) {
+        super(name);
+        initComponents();
+        initTreeComponents();
+    }
 
     public UI() {
         initComponents();
@@ -61,7 +66,7 @@ public class UI extends JFrame {
         DefaultMutableTreeNode node = (DefaultMutableTreeNode)selPath.getLastPathComponent();
         if(node.getParent()==null){
             return;
-        }else if(node.isLeaf()){
+        }else if(!node.getParent().equals(root)){
 
         }else {
             String name=(String)node.getUserObject();
@@ -69,6 +74,7 @@ public class UI extends JFrame {
                 Matrix_UI matrix_ui = MatrixListElements.get(name);
                 matrix_ui.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 matrix_ui.pack();
+                matrix_ui.initComboBox();
                 matrix_ui.setVisible(true);
             }else {
                 Function_UI function_ui = FunctionListElements.get(name);
@@ -85,19 +91,18 @@ public class UI extends JFrame {
         treeModel=new DefaultTreeModel(root);
         treeModel.addTreeModelListener(new MyTreeModelListener());
         elementsList = new JTree(treeModel);
-//        elementsList.setEditable(true);
+
         elementsList.getSelectionModel().setSelectionMode
                 (TreeSelectionModel.SINGLE_TREE_SELECTION);
         elementsList.setShowsRootHandles(true);
+        elementsList.setFont(new Font("Microsoft YaHei UI", Font.BOLD, 12));
 
         ToolTipManager.sharedInstance().registerComponent(elementsList);
 
         ImageIcon RootIcon = new ImageIcon("icon\\root.png");
         ImageIcon ElementIcon = new ImageIcon("icon\\elements.png");
         ImageIcon LeafIcon = new ImageIcon("icon\\method.png");
-        if (LeafIcon != null) {
-            elementsList.setCellRenderer(new MyRenderer(RootIcon,ElementIcon,LeafIcon));
-        }
+        elementsList.setCellRenderer(new MyRenderer(RootIcon,ElementIcon,LeafIcon));
         elementsList.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -186,6 +191,7 @@ public class UI extends JFrame {
 
                     //---- elementsList ----
                     elementsList.setVisibleRowCount(25);
+                    elementsList.setFont(new Font("Microsoft YaHei UI", Font.BOLD, 12));
                     scrollPane1.setViewportView(elementsList);
                 }
                 operation.add(scrollPane1);
@@ -236,7 +242,7 @@ public class UI extends JFrame {
                 //======== addFunction ========
                 {
                     addFunction.setText("\u65b0\u5efa\u51fd\u6570");
-                    addFunction.setIcon(new ImageIcon("icon\\function png icon.png"));
+                    addFunction.setIcon(new ImageIcon("D:\\JavaProject\\Numerical-Analysis\\icon\\function png icon.png"));
                     addFunction.setBorder(UIManager.getBorder("DesktopIcon.border"));
                     addFunction.addMouseListener(new MouseAdapter() {
                         @Override
@@ -309,7 +315,6 @@ public class UI extends JFrame {
     private JButton okButton;
     private JButton cancelButton;
     private JButton helpButton;
-
     // JFormDesigner - End of variables declaration  //GEN-END:variables
     private DefaultTreeModel treeModel;
     private Map<String, Matrix_UI> MatrixListElements = new HashMap<>();
@@ -403,6 +408,7 @@ public class UI extends JFrame {
             RootIcon = rootIcon;
             ElementIcon = elementIcon;
             LeafIcon = leafIcon;
+
         }
 
         public Component getTreeCellRendererComponent(
@@ -418,12 +424,17 @@ public class UI extends JFrame {
                     tree, value, sel,
                     expanded, leaf, row,
                     hasFocus);
-            if (leaf && isMethod(value)) {
+            if (isRoot(value)){
+                setIcon(RootIcon);
+            } else if (leaf && isMethod(value)) {
                 setIcon(LeafIcon);
 //                setToolTipText("This book is in the Tutorial series.");
-            } else if (isRoot(value)){
-                setIcon(RootIcon);
             } else{
+                if(MatrixListElements.containsKey((String)(((DefaultMutableTreeNode)value).getUserObject()))){
+                    setToolTipText("双击编辑矩阵或计算");
+                }else{
+                    setToolTipText("双击编辑函数或计算");
+                }
                 setIcon(ElementIcon);
             }
 
@@ -433,7 +444,7 @@ public class UI extends JFrame {
         protected boolean isMethod(Object value) {
             DefaultMutableTreeNode node =
                     (DefaultMutableTreeNode)value;
-            return node.getParent() != null;
+            return !node.getParent().equals(root);
         }
 
         protected boolean isRoot(Object value) {

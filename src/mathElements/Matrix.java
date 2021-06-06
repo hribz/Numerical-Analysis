@@ -125,7 +125,7 @@ public class Matrix implements Serializable{
             throw new MathException("these matrices can't multiply the other");
         }
         ArrayList<Vec> temp=new ArrayList<Vec>();
-        Double[][] v=new Double[n][n];
+        Double[][] v=new Double[matrix.n][m];
         for(int j=0;j<matrix.n;j++){
             for(int i=0;i<m;i++){
                 v[j][i]=0.0;
