@@ -1,62 +1,128 @@
 package IterativeMethods;
 
+import mathElements.Constant;
 import mathElements.Function;
 import mathElements.MathException;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.LineNumberReader;
 
 public class IterationMethod {
     double x;
     double Accuracy;
     Function f;
+    int times;
 
-    public void SimpleStimulate() throws IOException, MathException {
-        int times=0;
-        double preX=x;
-        double error=1;
-        while(error>Accuracy){
-            f.computation(preX);
-            x= f.funValue;
-            error=Math.abs((x-preX)/x);
-            times++;
-            preX=x;
+    /**
+     * 普通迭代法模拟
+     * @return
+     * @throws IOException
+     * @throws MathException
+     */
+    public String SimpleStimulate() throws IOException, MathException {
+        StringBuilder str=new StringBuilder();
+        Process pro = Runtime.getRuntime().exec("python python\\SimpleIteration.py "+ f.expr+ " "+ x + " " + Accuracy);
+        InputStreamReader stdin=new InputStreamReader(pro.getInputStream());
+        LineNumberReader input=new LineNumberReader(stdin);
+
+        try {
+            String line;
+            String preLine;
+            String prePreLine;
+            preLine="err";
+            prePreLine="err";
+            while((line=input.readLine())!=null){
+                if(line.trim().equals("error")){
+                    throw new MathException("迭代方法在"+ x +"处发散，请修改x或φ(x)");
+                }
+                str.append(line).append("\n");
+                prePreLine=preLine;
+                preLine=line;
+            }
+            x = Double.parseDouble(prePreLine);
+            times = Integer.parseInt(preLine);
+            pro.destroy();
+            str.append("普通迭代法通过").append(times).append("次迭代，解得精度为").append(Constant.iterationEsp)
+                    .append(String.format("的解x%d=%.9f\n", times, x)).append("------------------------------\n");
+            return str.toString();
+        }catch (NumberFormatException err){
+            throw new MathException("请检查表达式是否合法");
         }
-        System.out.println(String.format("x%d=%.9f",times,x));
     }
 
-    public void SteffensenStimulate() throws IOException, MathException {
-        int times=0;
-        double preX=x;
-        double error=1;
-        double y,z;
-        while(error>Accuracy){
-            f.computation(preX);
-            y=f.funValue;
-            f.computation(y);
-            z=f.funValue;
-            x=preX-(y-preX)*(y-preX)/(z-2*y+preX);
-            error=Math.abs((x-preX)/x);
-            times++;
-            preX=x;
+    /**
+     * Steffensen迭代法模拟
+     * @return
+     * @throws IOException
+     * @throws MathException
+     */
+    public String SteffensenStimulate() throws IOException, MathException {
+        StringBuilder str=new StringBuilder();
+        Process pro = Runtime.getRuntime().exec("python python\\SteffensenIteration.py "+ f.expr+ " "+ x + " " + Accuracy);
+        InputStreamReader stdin=new InputStreamReader(pro.getInputStream());
+        LineNumberReader input=new LineNumberReader(stdin);
+
+        try {
+            String line;
+            String preLine;
+            String prePreLine;
+            preLine="err";
+            prePreLine="err";
+            while((line=input.readLine())!=null){
+                if(line.trim().equals("error")){
+                    throw new MathException("迭代方法在"+ x +"处发散，请修改x或φ(x)");
+                }
+                str.append(line).append("\n");
+                prePreLine=preLine;
+                preLine=line;
+            }
+            x = Double.parseDouble(prePreLine);
+            times = Integer.parseInt(preLine);
+            pro.destroy();
+            str.append("Sttenfensen迭代法通过").append(times).append("次迭代，解得精度为").append(Constant.iterationEsp)
+                    .append(String.format("的解x%d=%.9f\n", times, x)).append("------------------------------\n");
+            return str.toString();
+        }catch (NumberFormatException err){
+            throw new MathException("请检查表达式是否合法");
         }
-        System.out.println(String.format("x%d=%.9f",times,x));
     }
 
-    public void NewTownStimulate(double x) throws IOException, MathException {
-        int times=0;
-        double preX=x;
-        double error=1;
-        double fx,dfx;
-        while(error>Accuracy){
-            f.computation(preX);
-            fx=f.funValue;
-            dfx=f.derivationValue;
-            x=preX-fx/dfx;
-            error=Math.abs((x-preX));
-            times++;
-            preX=x;
+    /**
+     * 牛顿法模拟
+     * @return
+     * @throws IOException
+     * @throws MathException
+     */
+    public String NewTownStimulate() throws IOException, MathException {
+        StringBuilder str=new StringBuilder();
+        Process pro = Runtime.getRuntime().exec("python python\\NewtonIteration.py "+ f.expr+ " "+ x + " " + Accuracy);
+        InputStreamReader stdin=new InputStreamReader(pro.getInputStream());
+        LineNumberReader input=new LineNumberReader(stdin);
+
+        try {
+            String line;
+            String preLine;
+            String prePreLine;
+            preLine="err";
+            prePreLine="err";
+            while((line=input.readLine())!=null){
+                if(line.trim().equals("error")){
+                    throw new MathException("牛顿法在"+ x +"处发散，请修改x或φ(x)");
+                }
+                str.append(line).append("\n");
+                prePreLine=preLine;
+                preLine=line;
+            }
+            x = Double.parseDouble(prePreLine);
+            times = Integer.parseInt(preLine);
+            pro.destroy();
+            str.append("牛顿法通过").append(times).append("次迭代，解得精度为").append(Constant.iterationEsp)
+                    .append(String.format("的解x%d=%.9f\n", times, x)).append("------------------------------\n");
+            return str.toString();
+        }catch (NumberFormatException err){
+            throw new MathException("请检查表达式是否合法");
         }
-        System.out.println(String.format("x%d=%.9f",times,x));
     }
 
     public IterationMethod(double x, double accuracy, Function f) {

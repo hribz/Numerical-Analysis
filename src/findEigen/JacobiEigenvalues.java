@@ -7,17 +7,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class JacobiEigenvalues {
+    public static Vec Eigenvalues;
+    public static Matrix EigenVectors;
     /**
-     * Jacobi方法求特征值，特征向量
+     * Jacobi迭代法求矩阵特征值
+     * @param matrix 待求矩阵
+     * @throws MathException
+     * @throws IOException
+     * @throws ClassNotFoundException
      */
-    public static void jacobiEigen(Matrix matrix,Vec Eigenvalues) throws MathException, IOException, ClassNotFoundException {
+    public static void jacobiEigen(Matrix matrix) throws MathException, IOException, ClassNotFoundException {
         if(matrix.m!=matrix.n){
-            System.out.println(("please check your matrix's level"));
-            return;
+            throw new MathException("该矩阵不是方阵");
         }
         if(!matrix.isSymmetry()){
-            System.out.println("This matrix is not symmetric");
-            return;
+            throw new MathException("请输入实对称矩阵");
         }
         Matrix matrixA= GenericCopy.deepCopy(matrix);
         int level=matrixA.level;
@@ -96,8 +100,8 @@ public class JacobiEigenvalues {
         for(int i=0;i<level;i++){
             values[i]=matrixA.A.get(i).x[i];
         }
-        Eigenvalues=new Vec(values);
-
+        Eigenvalues=GenericCopy.deepCopy(new Vec(values));
+        EigenVectors = GenericCopy.deepCopy(matrixU);
         for(int i=0;i<level;i++){
             System.out.println("特征值"+(i+1)+"为:"+Eigenvalues.x[i]+"  对应特征向量为"+"x"+(i+1)+"="+matrixU.A.get(i));
         }

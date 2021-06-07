@@ -9,4 +9,5 @@ public class Constant {
     public static double gaussSeidelEsp=1e-4;
     public static double sorEsp=1e-5;
     public static double jacobiEignEsp=1e-5;
+    public static double iterationEsp=1e-6;
 }

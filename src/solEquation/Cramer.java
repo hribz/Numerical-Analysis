@@ -10,6 +10,13 @@ import Tools.*;
  */
 public class Cramer {
 
+    /**
+     * 克莱姆法则求解
+     * @param equ 待求等式
+     * @throws IOException
+     * @throws ClassNotFoundException
+     * @throws MathException
+     */
     public static void cramer(Equation equ) throws IOException, ClassNotFoundException, MathException {
         Matrix oriMatrix =equ.getA();
         if(Math.abs(oriMatrix .det.res)<= Constant.compareZeroEsp){
