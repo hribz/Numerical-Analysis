@@ -16,8 +16,9 @@ public class Jacobi {
      * 若||G||<1，则x(k)收敛
      * 重复迭代，若||G||不是很接近1，则可在||x(k)-x(k+1)||很小时停止，将其当作解
      */
-    public static void jacobi(Equation equ, int iterateTimes) throws IOException, ClassNotFoundException, MathException {
+    public static String jacobi(Equation equ, int iterateTimes) throws IOException, ClassNotFoundException, MathException {
         Matrix matrixA= GenericCopy.deepCopy(equ.getA());
+        StringBuilder str=new StringBuilder();
         if(matrixA.m!=matrixA.n){
             throw new MathException("this is not a square matrix");
         }
@@ -44,16 +45,16 @@ public class Jacobi {
         }
         matrixG=new Matrix(vecListG);
         d=new Vec(vd);
-        System.out.println("迭代矩阵为：\n"+matrixG);
-        System.out.println("d为：\n"+d);
+        str.append("迭代矩阵为：\n").append(matrixG).append("\n");
+        str.append("d为：\n").append(d).append("\n");
         /*
         设置X,nextX,开始迭代
          */
-        System.out.println("Step       x1          x2         x3");
+        str.append("Step       x1          x2         x3\n");
         Vec X=new Vec(level);
         Vec nextX;
         Vec cmp=new Vec(level);
-        System.out.println(" 0  "+printX(X));
+        str.append(" 0  ").append(printX(X)).append("\n");
 
         for(int i=1;i<=iterateTimes;i++){
             nextX=matrixG.mulVec(X);
@@ -61,14 +62,14 @@ public class Jacobi {
             System.out.println(" "+i+"  "+printX(nextX));
             cmp.equAsubB(X,nextX);
             if(cmp.infiniteNorm()<= Constant.jacobiEsp){
-                System.out.println("solEquation.Jacobi solve this equation by "+i+" steps");
+                str.append("Jacobi迭代法经过").append(i).append("步得出精度为").append(Constant.jacobiEsp).append("的结果\n");
                 equ.setX(nextX);
-                return;
+                return str.toString();
             }
             X.equVec(nextX);
         }
 
-        System.out.println("solEquation.Jacobi can't compute this equation,please try to enlarge your iterate Times and make sure your equation can be compute by solEquation.Jacobi");
+        return "Jacobi迭代法无法在"+iterateTimes+"步内得出精度为"+Constant.jacobiEsp+"的解，请尝试增加迭代步数并确保迭代法收敛\n";
     }
 
     public static String printX(Vec X){

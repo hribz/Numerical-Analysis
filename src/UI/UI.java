@@ -67,9 +67,34 @@ public class UI extends JFrame {
         if(node.getParent()==null){
             return;
         }else if(!node.getParent().equals(root)){
+            String type=node.getUserObject().toString();
+            String parentName = node.getParent().toString();
+            switch (type){
+                case "线性方程求解":
+                    SolEquation sol_ui = SolListMethods.get(parentName);
+                    sol_ui.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    sol_ui.pack();
+                    sol_ui.initComboBox();
+                    sol_ui.setVisible(true);
+                    break;
+                case "求根":
+                    Iterative_UI iterative_ui = IterativeListMethods.get(parentName);
+                    iterative_ui.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    iterative_ui.pack();
+                    iterative_ui.setVisible(true);
+                    iterative_ui.init();
+                    break;
+                case "插值拟合":
+                    Interpolation interpolation = InterpolateListMethods.get(parentName);
+                    interpolation.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    interpolation.pack();
+                    interpolation.setVisible(true);
+                    break;
+                default:
 
+            }
         }else {
-            String name=(String)node.getUserObject();
+            String name=node.toString();
             if(MatrixListElements.containsKey(name)){
                 Matrix_UI matrix_ui = MatrixListElements.get(name);
                 matrix_ui.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -81,6 +106,7 @@ public class UI extends JFrame {
                 function_ui.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 function_ui.pack();
                 function_ui.setVisible(true);
+                function_ui.getFuntion().setText(function_ui.getFunction().expr);
             }
         }
     }
@@ -137,7 +163,6 @@ public class UI extends JFrame {
                 Matrix temp_matrix = MatrixListElements.get(name).getMatrix();
                 if(temp_matrix.m==temp_matrix.n){
                     methods.add(new DefaultMutableTreeNode("线性方程求解"));
-                    methods.add(new DefaultMutableTreeNode("求特征值"));
                 }
             } else {
                 throw new Exception();
@@ -161,7 +186,7 @@ public class UI extends JFrame {
         elementsList = new JTree();
         picture = new JPanel();
         scrollPane2 = new JScrollPane();
-        textArea1 = new JTextArea();
+        outputArea = new JTextArea();
         menuBar1 = new JMenuBar();
         addMatrix = new JMenu();
         addFunction = new JMenu();
@@ -203,11 +228,11 @@ public class UI extends JFrame {
                     //======== scrollPane2 ========
                     {
 
-                        //---- textArea1 ----
-                        textArea1.setRequestFocusEnabled(false);
-                        textArea1.setFocusable(false);
-                        textArea1.setEditable(false);
-                        scrollPane2.setViewportView(textArea1);
+                        //---- outputArea ----
+                        outputArea.setRequestFocusEnabled(false);
+                        outputArea.setFocusable(false);
+                        outputArea.setEditable(false);
+                        scrollPane2.setViewportView(outputArea);
                     }
                     picture.add(scrollPane2, new GridConstraints(0, 0, 1, 1,
                         GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH,
@@ -306,7 +331,7 @@ public class UI extends JFrame {
     private JTree elementsList;
     private JPanel picture;
     private JScrollPane scrollPane2;
-    private JTextArea textArea1;
+    private JTextArea outputArea;
     private JMenuBar menuBar1;
     private JMenu addMatrix;
     private JMenu addFunction;
@@ -319,7 +344,26 @@ public class UI extends JFrame {
     private DefaultTreeModel treeModel;
     private Map<String, Matrix_UI> MatrixListElements = new HashMap<>();
     private Map<String, Function_UI> FunctionListElements = new HashMap<>();
+    private Map<String, SolEquation> SolListMethods = new HashMap<>();
+    private Map<String, Interpolation> InterpolateListMethods = new HashMap<>();
+    private Map<String, Iterative_UI> IterativeListMethods = new HashMap<>();
     private final DefaultMutableTreeNode root = new DefaultMutableTreeNode("矩阵和函数");
+
+    public JTextArea getOutputArea() {
+        return outputArea;
+    }
+
+    public Map<String, Interpolation> getInterpolateListMethods() {
+        return InterpolateListMethods;
+    }
+
+    public Map<String, Iterative_UI> getIterativeListMethods() {
+        return IterativeListMethods;
+    }
+
+    public Map<String, SolEquation> getSolListMethods() {
+        return SolListMethods;
+    }
 
     public DefaultMutableTreeNode getRoot() {
         return root;

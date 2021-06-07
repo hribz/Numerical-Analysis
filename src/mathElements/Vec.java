@@ -127,10 +127,10 @@ public class Vec implements Serializable {
         StringBuilder str=new StringBuilder();
         str.append("(");
         for (int i=0;i<level-1;i++) {
-            str.append(x[i]);
-            str.append(", ");
+            str.append(String.format("%.6f",x[i]));
+            str.append(",");
         }
-        str.append(x[level - 1]).append(")");
+        str.append(String.format("%.6f",x[level-1])).append(")");
         return str.toString();
     }
 

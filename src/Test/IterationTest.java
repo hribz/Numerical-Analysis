@@ -18,6 +18,6 @@ public class IterationTest {
 
         IterationMethod iterationMethod =new IterationMethod(1.5,accuracy,f);
 //        iterationMethod.SteffensenStimulate();
-        iterationMethod.NewTownStimulate(1.5);
+        iterationMethod.NewTownStimulate();
     }
 }

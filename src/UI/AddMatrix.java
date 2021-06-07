@@ -41,7 +41,7 @@ public class AddMatrix extends JFrame {
         Double[] x;
         Vec b;
         try{
-            for (ArrayList<JTextPane> jTextPanes : text) {
+            for (ArrayList<JTextField> jTextPanes : text) {
                 x = new Double[m];
                 for (int j = 0; j < jTextPanes.size(); j++) {
                     String str = jTextPanes.get(j).getText();
@@ -55,7 +55,12 @@ public class AddMatrix extends JFrame {
             return;
         }
         matrix = new Matrix(a);
-        ui.getListElements().put("matrix"+ui.getListElements().size(),matrix);
+        String matrix_name = "matrix"+ui.getMatrixListElements().size();
+        Matrix_UI matrix_ui = new Matrix_UI(matrix_name,matrix,ui);
+        ui.getMatrixListElements().put(matrix_name,matrix_ui);
+        ui.getSolListMethods().put(matrix_name,new SolEquation(ui,matrix_ui));
+        ui.createNodes(ui.getRoot(),matrix_name,"Matrix");
+        dispose();
     }
 
     private void mnOkButtonActionPerformed(ActionEvent e){
@@ -157,7 +162,7 @@ public class AddMatrix extends JFrame {
                 //======== scrollPaneN ========
                 {
 
-                    //---- textPaneN ----
+                    //---- textField ----
                     spinnerN.setPreferredSize(new Dimension(50, 23));
                     scrollPaneN.setViewportView(spinnerN);
                 }
@@ -230,7 +235,7 @@ public class AddMatrix extends JFrame {
                         panel.add(temp_panel_list);
                         ArrayList<JScrollPane> temp_scroll_list=new ArrayList<>();
                         scroll.add(temp_scroll_list);
-                        ArrayList<JTextPane> temp_text_list=new ArrayList<>();
+                        ArrayList<JTextField> temp_text_list=new ArrayList<>();
                         text.add(temp_text_list);
                         for(int j=0;j<m;j++){
                             //======== panel ========
@@ -243,8 +248,8 @@ public class AddMatrix extends JFrame {
                                 {
                                     JScrollPane temp_scroll = new JScrollPane();
                                     temp_scroll_list.add(temp_scroll);
-                                    //---- textPane ----
-                                    JTextPane temp_text=new JTextPane();
+                                    //---- textField ----
+                                    JTextField temp_text=new JTextField();
                                     temp_text_list.add(temp_text);
                                     temp_text.setMinimumSize(new Dimension(60, 23));
                                     temp_text.setPreferredSize(new Dimension(60, 23));
@@ -314,7 +319,7 @@ public class AddMatrix extends JFrame {
     private JPanel mnInputPanel;
     private JPanel mnButtonPanel;
     private ArrayList<ArrayList<JPanel>> panel;
-    private ArrayList<ArrayList<JTextPane>> text;
+    private ArrayList<ArrayList<JTextField>> text;
     private ArrayList<ArrayList<JScrollPane>> scroll;
     private JPanel buttonPanel;
     private JButton cancelButton;
@@ -330,7 +335,6 @@ public class AddMatrix extends JFrame {
 
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
-    private Matrix matrix;
     private boolean hasInput;
     private int m,n;
     private UI ui;

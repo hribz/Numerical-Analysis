@@ -3,46 +3,67 @@ JFDML JFormDesigner: "7.0.4.0.360" Java: "11.0.6" encoding: "UTF-8"
 new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
-		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class com.intellij.uiDesigner.core.GridLayoutManager ) {
-			"$columnCount": 2
-			"$rowCount": 1
-			"hGap": 0
-			"vGap": 0
-		} ) {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class java.awt.BorderLayout ) ) {
 			name: "this"
 			"minimumSize": new java.awt.Dimension( 400, 100 )
-			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-				name: "scrollPane1"
-				add( new FormComponent( "javax.swing.JTextPane" ) {
-					name: "textPane1"
-					"preferredSize": new java.awt.Dimension( 300, 23 )
-					"minimumSize": new java.awt.Dimension( 300, 23 )
-					"toolTipText": "示例：x+1"
-				} )
-			}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) )
-			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.intellij.uiDesigner.core.GridLayoutManager ) {
-				"$columnCount": 1
-				"$rowCount": 2
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) {
+				"vgap": 5
+				"hgap": 5
 			} ) {
 				name: "panel1"
-				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "cancelButton"
-					"text": "取消"
-					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "cancelButtonActionPerformed", true ) )
-				}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) )
-				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "okButton"
-					"text": "确定"
-					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "okButtonActionPerformed", true ) )
-				}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
-					"row": 1
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
+					"$columnSpecs": "350, 96"
+					"$rowSpecs": "71"
+					"$alignLeft": true
+					"$alignTop": true
+				} ) {
+					name: "panel2"
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
+						"$rowSpecs": "31"
+						"$hGap": 5
+						"$vGap": 5
+						"$columnSpecs": "340"
+					} ) {
+						name: "panel4"
+						add( new FormComponent( "javax.swing.JTextField" ) {
+							name: "textField1"
+							"preferredSize": new java.awt.Dimension( 260, 25 )
+							"minimumSize": new java.awt.Dimension( 49, 20 )
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) )
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
+						"$rowSpecs": "25, 25"
+						"$columnSpecs": "85"
+						"$vGap": 5
+					} ) {
+						name: "panel3"
+						add( new FormComponent( "javax.swing.JButton" ) {
+							name: "cancelButton"
+							"text": "取消"
+							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "cancelButtonActionPerformed", true ) )
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+							"ipadx": 3
+							"ipady": 3
+						} )
+						add( new FormComponent( "javax.swing.JButton" ) {
+							name: "okButton"
+							"text": "确定"
+							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "okButtonActionPerformed", true ) )
+						}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+							"gridy": 1
+						} )
+					}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
+						"gridx": 1
+					} )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "South"
 				} )
-			}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
-				"column": 1
+			}, new FormLayoutConstraints( class java.lang.String ) {
+				"value": "Center"
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 215, 135 )
-			"size": new java.awt.Dimension( 400, 105 )
+			"location": new java.awt.Point( 260, 155 )
+			"size": new java.awt.Dimension( 455, 105 )
 		} )
 	}
 }
