@@ -17,10 +17,20 @@ public class Function {
         this.expr = expr.replaceAll("\\s*","").replaceAll("\\^","**");
     }
 
+    /**
+     * 更新函数
+     * @param function 新的函数
+     */
     public void editFunction(String function){
         this.expr = function.replaceAll("\\s*","").replaceAll("\\^","**");
     }
 
+    /**
+     * 计算outX处函数值及导数值
+     * @param outX 待计算x
+     * @throws IOException 异常
+     * @throws MathException 异常
+     */
     public void computation(double outX) throws IOException, MathException {
         x=outX;
         try{

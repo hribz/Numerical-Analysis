@@ -9,6 +9,12 @@ public class Vec implements Serializable {
     public Double[] x;
     public int level;
 
+    /**
+     * 点乘向量
+     * @param v 待乘向量
+     * @return 点积
+     * @throws MathException 无法点乘
+     */
     public Double dotVec(Vec v) throws MathException {
         if(v.level!=this.level){
             throw new MathException("level not matches!");
@@ -20,6 +26,11 @@ public class Vec implements Serializable {
         return temp;
     }
 
+    /**
+     * 向量加法
+     * @param v 待加向量
+     * @throws MathException 无法相加
+     */
     public void addVec(Vec v) throws MathException {
         if(v.level!=this.level){
             throw new MathException("level not matches!");
@@ -29,6 +40,11 @@ public class Vec implements Serializable {
         }
     }
 
+    /**
+     * 向量减法
+     * @param v 待减向量
+     * @throws MathException 无法相减
+     */
     public void subVec(Vec v) throws MathException {
         if(v.level!=this.level){
             throw new MathException("level not matches!");
@@ -38,6 +54,11 @@ public class Vec implements Serializable {
         }
     }
 
+    /**
+     * 向量替换
+     * @param v 待换向量
+     * @throws MathException 无法替换
+     */
     public void equVec(Vec v) throws MathException {
         if(v.level!=this.level){
             throw new MathException("level not matches!");
@@ -47,6 +68,12 @@ public class Vec implements Serializable {
         }
     }
 
+    /**
+     * this=A-B
+     * @param A A向量
+     * @param B B向量
+     * @throws MathException 无法替换
+     */
     public void equAsubB(Vec A,Vec B) throws MathException {
         if(A.level!=this.level){
             throw new MathException("level not matches!");
@@ -88,7 +115,12 @@ public class Vec implements Serializable {
     }
 
     /**
-     * 范数
+     * 求向量level阶范数
+     * @param level 阶数
+     * @return level阶范数
+     * @throws MathException 无法求范数
+     * @throws IOException 异常
+     * @throws ClassNotFoundException 异常
      */
     public Double norm(int level) throws MathException, IOException, ClassNotFoundException {
         double norm=0.0;
@@ -112,7 +144,8 @@ public class Vec implements Serializable {
     }
 
     /**
-     * 行范数
+     * 求行范数
+     * @return 行范数
      */
     public Double infiniteNorm(){
         double norm=0.0;
@@ -134,17 +167,4 @@ public class Vec implements Serializable {
         return str.toString();
     }
 
-//    public mathElements.Vec deepClone() throws IOException,ClassNotFoundException{
-//        //将对象写入流中
-//        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-//        ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
-//        objectOutputStream.writeObject(this);
-//        objectOutputStream.flush();
-//        objectOutputStream.close();
-//
-//        //从流中取出
-//        ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
-//        ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
-//        return (mathElements.Vec) objectInputStream.readObject();
-//    }
 }

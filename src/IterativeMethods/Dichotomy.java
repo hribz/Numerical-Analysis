@@ -18,9 +18,9 @@ public class Dichotomy {
 
     /**
      * 二分模拟
-     * @return
-     * @throws IOException
-     * @throws MathException
+     * @return 求解过程信息
+     * @throws IOException 异常
+     * @throws MathException 异常
      */
     public String stimulate() throws IOException, MathException {
         StringBuilder str=new StringBuilder();

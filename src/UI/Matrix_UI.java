@@ -19,9 +19,6 @@ import mathElements.MathException;
 import mathElements.Matrix;
 import mathElements.Vec;
 
-/**
- * @author Brainrain
- */
 public class Matrix_UI extends JFrame {
     public Matrix_UI() {
         initComponents();

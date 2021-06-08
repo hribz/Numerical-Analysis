@@ -9,12 +9,14 @@ import java.util.ArrayList;
 public class JacobiEigenvalues {
     public static Vec Eigenvalues;
     public static Matrix EigenVectors;
+
     /**
      * Jacobi迭代法求矩阵特征值
+     *
      * @param matrix 待求矩阵
-     * @throws MathException
-     * @throws IOException
-     * @throws ClassNotFoundException
+     * @throws MathException 自定义异常
+     * @throws IOException 异常
+     * @throws ClassNotFoundException 异常
      */
     public static void jacobiEigen(Matrix matrix) throws MathException, IOException, ClassNotFoundException {
         if(matrix.m!=matrix.n){

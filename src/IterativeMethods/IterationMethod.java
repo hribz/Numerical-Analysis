@@ -16,7 +16,7 @@ public class IterationMethod {
 
     /**
      * 普通迭代法模拟
-     * @return
+     * @return 求解过程信息
      * @throws IOException
      * @throws MathException
      */
@@ -53,7 +53,7 @@ public class IterationMethod {
 
     /**
      * Steffensen迭代法模拟
-     * @return
+     * @return 求解过程信息
      * @throws IOException
      * @throws MathException
      */
@@ -90,7 +90,7 @@ public class IterationMethod {
 
     /**
      * 牛顿法模拟
-     * @return
+     * @return 求解过程信息
      * @throws IOException
      * @throws MathException
      */

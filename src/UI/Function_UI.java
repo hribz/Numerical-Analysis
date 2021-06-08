@@ -12,9 +12,6 @@ import javax.swing.border.*;
 import mathElements.Function;
 import mathElements.MathException;
 
-/**
- * @author Brainrain
- */
 public class Function_UI extends JFrame {
     public Function_UI() {
         initComponents();
