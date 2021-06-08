@@ -61,7 +61,7 @@ public class Jacobi {
         for(int i=1;i<=iterateTimes;i++){
             nextX=matrixG.mulVec(X);
             nextX.addVec(d);
-            System.out.println(" "+i+"  "+printX(nextX));
+            str.append(" ").append(i).append("  ").append(printX(nextX)).append("\n");
             cmp.equAsubB(X,nextX);
             if(cmp.infiniteNorm()<= Constant.jacobiEsp){
                 str.append("Jacobi迭代法经过").append(i).append("步得出精度为").append(Constant.jacobiEsp).append("的结果\n");
