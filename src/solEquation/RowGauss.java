@@ -10,6 +10,13 @@ import Tools.*;
  */
 public class RowGauss {
 
+    /**
+     * 列主元高斯消元法求线性方程组
+     * @param equ 待求方程组
+     * @throws MathException 无法求解
+     * @throws IOException 异常
+     * @throws ClassNotFoundException 异常
+     */
     public static void rowGauss(Equation equ) throws MathException, IOException, ClassNotFoundException {
         if(Math.abs(equ.getA().det.res)<= Constant.compareZeroEsp){
             throw new MathException("Don't have solve, please input again");
@@ -44,6 +51,9 @@ public class RowGauss {
 
     /**
      * 列主元高斯变换
+     * @param A A矩阵
+     * @param B B矩阵
+     * @throws MathException 无法变换
      */
     public static void gaussConvert(Matrix A, Matrix B) throws MathException {
         double m;

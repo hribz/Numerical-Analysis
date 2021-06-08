@@ -25,6 +25,9 @@ public class Matrix implements Serializable{
 
     /**
      * l列换r列
+     * @param l l列
+     * @param r r列
+     * @throws MathException 无法换列的异常
      */
     public void convertRow(int l, int r) throws MathException {
         if(l>=n||r>=n) {
@@ -40,7 +43,10 @@ public class Matrix implements Serializable{
     }
 
     /**
-     * 用传入的v改变i列
+     * 用向量v替换i列
+     * @param i i列
+     * @param v 向量
+     * @throws MathException 无法替换的异常
      */
     public void changeRow(int i, Vec v) throws MathException {
         if(i>=n) {
@@ -54,6 +60,9 @@ public class Matrix implements Serializable{
 
     /**
      * l行换r行
+     * @param l l行
+     * @param r r行
+     * @throws MathException 无法换行的异常
      */
     public void convertLine(int l, int r) throws MathException {
         if(l>=m||r>=m) {
@@ -74,7 +83,10 @@ public class Matrix implements Serializable{
     }
 
     /**
-     * 用传入的v改变第i行
+     * 用向量v替换i行
+     * @param i i行
+     * @param v 向量
+     * @throws MathException 无法替换的异常
      */
     public void changeLine(int i, Vec v) throws MathException {
         if(i>=m) {
@@ -89,7 +101,11 @@ public class Matrix implements Serializable{
     }
 
     /**
-     * l行+num*r行
+     * 将l行变换为l行+num*r行
+     * @param l l行
+     * @param r r行
+     * @param num num
+     * @throws MathException 无法变换的异常
      */
     public void calMatrix(int l, int r, Double num) throws MathException {
         if(l>=m||r>=m) {
@@ -102,6 +118,9 @@ public class Matrix implements Serializable{
 
     /**
      * 矩阵乘向量
+     * @param x 待乘向量
+     * @return 返回结果向量
+     * @throws MathException 无法相乘的异常
      */
     public Vec mulVec(Vec x) throws MathException {
         if(n!=x.level){
@@ -118,14 +137,17 @@ public class Matrix implements Serializable{
     }
 
     /**
-     * 矩阵乘法
+     * 矩阵相乘
+     * @param matrix 待乘矩阵
+     * @return 返回结果矩阵
+     * @throws MathException 矩阵无法相乘的异常
      */
     public Matrix mulMatrix(Matrix matrix) throws MathException {
         if(n!=matrix.m){
             throw new MathException("these matrices can't multiply the other");
         }
         ArrayList<Vec> temp=new ArrayList<Vec>();
-        Double[][] v=new Double[n][n];
+        Double[][] v=new Double[matrix.n][m];
         for(int j=0;j<matrix.n;j++){
             for(int i=0;i<m;i++){
                 v[j][i]=0.0;
@@ -141,7 +163,9 @@ public class Matrix implements Serializable{
     }
 
     /**
-     * i行除以m
+     * i行除以num
+     * @param i i行
+     * @param num num
      */
     public void divLine(int i, double num){
         for(int j=0;j<n;j++){
@@ -153,6 +177,7 @@ public class Matrix implements Serializable{
 
     /**
      * 构造函数
+     * @param matrix 向量列表
      */
     public Matrix(ArrayList<Vec> matrix){
         this.A=matrix;
@@ -175,7 +200,8 @@ public class Matrix implements Serializable{
     }
 
     /**
-     * 是否为实对称矩阵
+     * 判断是否为实对称矩阵，用于Jacobi迭代
+     * @return 是否为实对称矩阵
      */
     public boolean isSymmetry(){
         if(m!=n){
@@ -208,7 +234,9 @@ public class Matrix implements Serializable{
     }
 
     /**
-     * 单位阵
+     * 生成m阶单位阵
+     * @param m 阶数
+     * @return m阶单位阵
      */
     public static Matrix unitMatrix(int m){
         ArrayList<Vec> iNum =new ArrayList<>();
@@ -227,8 +255,11 @@ public class Matrix implements Serializable{
     }
 
     /**
-     *
+     * 求逆矩阵
      * @return 逆矩阵
+     * @throws MathException 无法求逆
+     * @throws IOException 异常
+     * @throws ClassNotFoundException 异常
      */
     public Matrix inverseMatrix() throws MathException, IOException, ClassNotFoundException {
         Matrix I;  //单位阵
@@ -243,7 +274,12 @@ public class Matrix implements Serializable{
     }
 
     /**
-     * 范数
+     * 求level阶范数
+     * @param level 阶数
+     * @return 范数值
+     * @throws MathException 无法求level阶范数的异常
+     * @throws IOException 异常
+     * @throws ClassNotFoundException 异常
      */
     public Double norm(int level) throws MathException, IOException, ClassNotFoundException {
         double norm=0.0;
@@ -277,6 +313,7 @@ public class Matrix implements Serializable{
 
     /**
      * 行范数
+     * @return 行范数
      */
     public Double infiniteNorm(){
         double norm=0.0;
@@ -292,6 +329,7 @@ public class Matrix implements Serializable{
 
     /**
      * frobenius范数
+     * @return frobenius范数
      */
     public Double frobeniusNorm(){
         double norm=0.0;
@@ -315,17 +353,4 @@ public class Matrix implements Serializable{
         return str.toString();
     }
 
-//    public mathElements.Matrix deepClone() throws IOException,ClassNotFoundException{
-//        //将对象写入流中
-//        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-//        ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
-//        objectOutputStream.writeObject(this);
-//        objectOutputStream.flush();
-//        objectOutputStream.close();
-//
-//        //从流中取出
-//        ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
-//        ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
-//        return (mathElements.Matrix) objectInputStream.readObject();
-//    }
 }

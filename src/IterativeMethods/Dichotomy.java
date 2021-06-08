@@ -5,6 +5,7 @@ import Tools.*;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.LineNumberReader;
 import java.io.OutputStreamWriter;
 
 public class Dichotomy {
@@ -12,53 +13,45 @@ public class Dichotomy {
     double b;
     double x;
     double Accuracy;
+    int times;
     Function f;
-    public Process pro;
-    public InputStreamReader stdin;
 
-    public void stimulate() throws IOException, MathException {
-        double c=0.0;
-        int times=-1;
-        double fa,fb,fc;
-
-        Process pro = Runtime.getRuntime().exec("python src\\IterativeMethods\\dichotomy.py "+ f.expr+ " "+ a + " " + b + " " + Accuracy);
+    /**
+     * 二分模拟
+     * @return 求解过程信息
+     * @throws IOException 异常
+     * @throws MathException 异常
+     */
+    public String stimulate() throws IOException, MathException {
+        StringBuilder str=new StringBuilder();
+        Process pro = Runtime.getRuntime().exec("python python\\dichotomy.py "+ f.expr+ " "+ a + " " + b + " " + Accuracy);
         InputStreamReader stdin=new InputStreamReader(pro.getInputStream());
+        LineNumberReader input=new LineNumberReader(stdin);
 
-        f.computation(a);
-        fa=f.funValue;
-        f.computation(b);
-        fb=f.funValue;
-        if(fa*fb>0){
-            return;
-        }
-        try{
-            while (b - a > Accuracy) {
-                c = (a + b) / 2;
-                f.computation(a);
-                fa = f.funValue;
-                f.computation(b);
-                fb = f.funValue;
-                f.computation(c);
-                fc = f.funValue;
-                if (Math.abs(fc) < Constant.compareZeroEsp) {
-                    times++;
-                    x = c;
-                    System.out.println(String.format("x%d=%.9f", times, c));
-                    break;
-                } else if (fc * fa < 0) {
-                    b = c;
-                } else if (fc * fb < 0) {
-                    a = c;
-                }
-                times++;
+        try {
+            String line = input.readLine();
+            String preLine;
+            String prePreLine;
+            if(line.trim().equals("a,b error")){
+                throw new MathException("["+a+","+b+"]"+"内函数无唯一解或有重根");
             }
-        }catch (MathException e){
-            System.out.println(e.Inf);
-        }finally {
+            str.append(line).append("\n");
+            preLine=line;
+            prePreLine="error";
+            while((line=input.readLine())!=null){
+                str.append(line).append("\n");
+                prePreLine=preLine;
+                preLine=line;
+            }
+            x = Double.parseDouble(prePreLine);
+            times = Integer.parseInt(preLine);
             pro.destroy();
+            str.append("二分法通过").append(times).append("次二分，解得精度为").append(Constant.iterationEsp)
+                    .append(String.format("的解x%d=%.9f\n", times, x)).append("------------------------------\n");
+            return str.toString();
+        }catch (NumberFormatException err){
+            throw new MathException("请检查表达式是否合法");
         }
-        x=c;
-        System.out.println(String.format("x%d=%.9f",times,c));
     }
 
     public Dichotomy(double a, double b, double accuracy, Function f) {

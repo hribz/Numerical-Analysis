@@ -16,6 +16,5 @@ public class InterpolationTest {
         Collections.addAll(f, F);
 
         Interpolation interpolation=new Interpolation(x,f,4);
-        interpolation.NewTownInterpolate();
     }
 }
