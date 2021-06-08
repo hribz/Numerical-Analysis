@@ -19,9 +19,6 @@ import com.intellij.uiDesigner.core.*;
 import mathElements.Function;
 import mathElements.Matrix;
 
-/**
- * @author Brainrain
- */
 public class UI extends JFrame {
     public UI(String name) {
         super(name);
@@ -33,12 +30,6 @@ public class UI extends JFrame {
         initComponents();
         initTreeComponents();
     }
-
-    private void okButtonActionPerformed(ActionEvent e) {
-        // TODO add your code here
-        JOptionPane.showMessageDialog(null, "test UI");
-    }
-
     private void addMatrixMouseClicked(MouseEvent e) {
         // TODO add your code here
         AddMatrix addMatrix = new AddMatrix("请输入矩阵");
@@ -178,6 +169,16 @@ public class UI extends JFrame {
         scrollPane1.repaint();
     }
 
+    private void helpActionPerformed(ActionEvent e) {
+        // TODO add your code here
+        JOptionPane.showMessageDialog(null,"注意：本软件的函数功能需要配置安装了sympy包的python环境");
+    }
+
+    private void helpMouseClicked(MouseEvent e) {
+        // TODO add your code here
+        JOptionPane.showMessageDialog(null,"注意：本软件的函数功能需要配置安装了sympy包的python环境");
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         rootPanel = new JPanel();
@@ -191,10 +192,6 @@ public class UI extends JFrame {
         addMatrix = new JMenu();
         addFunction = new JMenu();
         help = new JMenu();
-        buttonBar = new JPanel();
-        okButton = new JButton();
-        cancelButton = new JButton();
-        helpButton = new JButton();
 
         //======== this ========
         setMinimumSize(new Dimension(800, 600));
@@ -283,40 +280,17 @@ public class UI extends JFrame {
                     help.setText("\u8bf4\u660e");
                     help.setIcon(new ImageIcon("D:\\JavaProject\\Numerical-Analysis\\icon\\help png icon.png"));
                     help.setBorder(UIManager.getBorder("DesktopIcon.border"));
+                    help.addActionListener(e -> helpActionPerformed(e));
+                    help.addMouseListener(new MouseAdapter() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            helpMouseClicked(e);
+                        }
+                    });
                 }
                 menuBar1.add(help);
             }
             rootPanel.add(menuBar1, BorderLayout.NORTH);
-
-            //======== buttonBar ========
-            {
-                buttonBar.setBorder(new EmptyBorder(12, 0, 0, 0));
-                buttonBar.setLayout(new GridBagLayout());
-                ((GridBagLayout)buttonBar.getLayout()).columnWidths = new int[] {0, 5, 80, 5, 80, 5, 80, 0};
-                ((GridBagLayout)buttonBar.getLayout()).rowHeights = new int[] {0, 0};
-                ((GridBagLayout)buttonBar.getLayout()).columnWeights = new double[] {1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0E-4};
-                ((GridBagLayout)buttonBar.getLayout()).rowWeights = new double[] {0.0, 1.0E-4};
-
-                //---- okButton ----
-                okButton.setText("OK");
-                okButton.addActionListener(e -> okButtonActionPerformed(e));
-                buttonBar.add(okButton, new GridBagConstraints(2, 0, 3, 1, 0.0, 0.0,
-                    GridBagConstraints.WEST, GridBagConstraints.VERTICAL,
-                    new Insets(0, 0, 0, 0), 0, 0));
-
-                //---- cancelButton ----
-                cancelButton.setText("Cancel");
-                buttonBar.add(cancelButton, new GridBagConstraints(4, 0, 1, 1, 0.0, 0.0,
-                    GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                    new Insets(0, 0, 0, 0), 0, 0));
-
-                //---- helpButton ----
-                helpButton.setText("Help");
-                buttonBar.add(helpButton, new GridBagConstraints(6, 0, 1, 1, 0.0, 0.0,
-                    GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                    new Insets(0, 0, 0, 0), 0, 0));
-            }
-            rootPanel.add(buttonBar, BorderLayout.SOUTH);
         }
         contentPane.add(rootPanel, BorderLayout.CENTER);
         pack();
@@ -336,10 +310,6 @@ public class UI extends JFrame {
     private JMenu addMatrix;
     private JMenu addFunction;
     private JMenu help;
-    private JPanel buttonBar;
-    private JButton okButton;
-    private JButton cancelButton;
-    private JButton helpButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
     private DefaultTreeModel treeModel;
     private Map<String, Matrix_UI> MatrixListElements = new HashMap<>();

@@ -12,9 +12,6 @@ import javax.swing.border.*;
 import com.intellij.uiDesigner.core.*;
 import mathElements.*;
 
-/**
- * @author Brainrain
- */
 public class AddMatrix extends JFrame {
     public AddMatrix() {
         initComponents();

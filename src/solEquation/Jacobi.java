@@ -15,6 +15,8 @@ public class Jacobi {
      * 取x(0)代入得x(1)=Gx(0)+d
      * 若||G||<1，则x(k)收敛
      * 重复迭代，若||G||不是很接近1，则可在||x(k)-x(k+1)||很小时停止，将其当作解
+     * @param iterateTimes 迭代次数
+     * @param equ 待求方程组
      */
     public static String jacobi(Equation equ, int iterateTimes) throws IOException, ClassNotFoundException, MathException {
         Matrix matrixA= GenericCopy.deepCopy(equ.getA());
@@ -59,7 +61,7 @@ public class Jacobi {
         for(int i=1;i<=iterateTimes;i++){
             nextX=matrixG.mulVec(X);
             nextX.addVec(d);
-            System.out.println(" "+i+"  "+printX(nextX));
+            str.append(" ").append(i).append("  ").append(printX(nextX)).append("\n");
             cmp.equAsubB(X,nextX);
             if(cmp.infiniteNorm()<= Constant.jacobiEsp){
                 str.append("Jacobi迭代法经过").append(i).append("步得出精度为").append(Constant.jacobiEsp).append("的结果\n");

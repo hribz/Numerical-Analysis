@@ -11,9 +11,6 @@ import javax.swing.border.*;
 import com.intellij.uiDesigner.core.*;
 import mathElements.Function;
 
-/**
- * @author Brainrain
- */
 public class AddFunction extends JFrame {
     public AddFunction() {
         initComponents();

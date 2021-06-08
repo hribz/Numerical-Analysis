@@ -16,9 +16,6 @@ import java.io.IOException;
 import javax.swing.*;
 import javax.swing.border.*;
 
-/**
- * @author Brainrain
- */
 public class Iterative_UI extends JFrame {
     public Iterative_UI(UI ui, Function_UI function_ui) {
         super(function_ui.getName()+"求根");

@@ -15,6 +15,7 @@ public class SOR {
      * 取x(0)代入得x(1)=Gx(0)+d
      * 若||G||<1，则x(k)收敛
      * 重复迭代，若||G||不是很接近1，则可在||x(k)-x(k+1)||很小时停止，将其当作解
+     *
      * @param equ 待求等式
      * @param iterateTimes 迭代步数
      * @param w 松弛因子
@@ -76,7 +77,10 @@ public class SOR {
     }
 
     /**
-     * 按行严格对角占优
+     * 判断按行严格对角占优
+     * @param matrix 待判断矩阵
+     * @return 是否按行严格对角占优
+     * @throws MathException 非方阵异常
      */
     public static boolean positiveLine(Matrix matrix) throws MathException {
         if (matrix.m != matrix.n) {

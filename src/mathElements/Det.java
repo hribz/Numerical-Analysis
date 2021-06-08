@@ -14,6 +14,10 @@ public class Det implements Serializable {
     public int level;
     int[] L=null, R=null;
 
+    /**
+     * 计算行列式
+     * @param A 待求矩阵
+     */
     public void permute(ArrayList<Vec> A) {
         res = 0;
         level = A.size();
@@ -28,6 +32,13 @@ public class Det implements Serializable {
         R=null;
     }
 
+    /**
+     * 计算行列式
+     * @param A 待求举证
+     * @param n 矩阵阶数
+     * @param output 用于计算行列式
+     * @param first output待确定数的位置
+     */
     public void backtrack(ArrayList<Vec> A, int n, List<Integer> output, int first) {
         // 所有数都填完了
         if (first == n) {
@@ -49,6 +60,10 @@ public class Det implements Serializable {
         }
     }
 
+    /**
+     * 确定逆序数符号
+     * @param output 待求数组
+     */
     public void InverseNum(List<Integer> output) {
         int left = 0, right = output.size()-1;
         if(L==null||L.length<=right+1){
@@ -67,6 +82,12 @@ public class Det implements Serializable {
         }
     }
 
+    /**
+     * 归并求逆序对个数，确定逆序数
+     * @param a 待求数组
+     * @param left 归并左端点
+     * @param right 归并右端点
+     */
     private void merge(int[] a, int left, int right) {
         if (left >= right) {
             return;

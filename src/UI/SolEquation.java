@@ -17,9 +17,6 @@ import java.util.Vector;
 import javax.swing.*;
 import javax.swing.border.*;
 
-/**
- * @author Brainrain
- */
 public class SolEquation extends JFrame {
     public SolEquation(UI ui,Matrix_UI parent){
         super(parent.getName());

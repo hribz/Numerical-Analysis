@@ -12,9 +12,6 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.border.*;
 
-/**
- * @author Brainrain
- */
 public class Interpolation extends JFrame {
     public Interpolation(UI ui, Function_UI function_ui) throws HeadlessException {
         super(function_ui.getName());
