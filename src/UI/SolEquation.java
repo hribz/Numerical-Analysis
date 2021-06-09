@@ -59,7 +59,7 @@ public class SolEquation extends JFrame {
         }
         try{
             Matrix_UI matrix_ui = ui.getMatrixListElements().get(comboBox1.getSelectedItem().toString());
-            Matrix matrix1 = matrix_ui.getMatrix();
+            target = matrix_ui.getMatrix();
             String matrix_name = matrix_ui.getName();
             model.setSelectedItem(model.getElementAt(0));
             model.removeElement(0);
