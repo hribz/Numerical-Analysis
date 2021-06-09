@@ -26,6 +26,7 @@ public class SolEquation extends JFrame {
         initComponents();
         panel1.remove(comboBox1);
         comboBox1=new JComboBox(model);
+        comboBox1.addActionListener(e->comboBox1ActionPerformed(e));
         panel1.add(comboBox1, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
                 new Insets(0, 0, 0, 0), 0, 0));
@@ -54,15 +55,16 @@ public class SolEquation extends JFrame {
 
     private void comboBox1ActionPerformed(ActionEvent e) {
         // TODO add your code here
+        System.out.println(isAdding);
         if(isAdding){
             return;
         }
         try{
             Matrix_UI matrix_ui = ui.getMatrixListElements().get(comboBox1.getSelectedItem().toString());
             target = matrix_ui.getMatrix();
-            String matrix_name = matrix_ui.getName();
+            String matrix_name = (String) model.getElementAt(0);
             model.setSelectedItem(model.getElementAt(0));
-            model.removeElement(0);
+            model.removeElement(model.getElementAt(0));
             model.insertElementAt(matrix_name,0);
             comboBox1.repaint();
         }catch (Exception err){
@@ -320,7 +322,6 @@ public class SolEquation extends JFrame {
                         new Insets(0, 0, 0, 5), 0, 0));
 
                     //---- comboBox1 ----
-                    comboBox1.addItemListener(e -> comboBox1ItemStateChanged(e));
                     comboBox1.addActionListener(e -> comboBox1ActionPerformed(e));
                     panel1.add(comboBox1, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
                         GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,

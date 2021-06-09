@@ -1,4 +1,5 @@
 # Numerical-Analysis
+<h4>JDK 版本:15.0.2</h4>
 <h4>注意：本软件的函数功能需要配置安装了sympy包的python环境</h4>
 <h1>现实现功能：</h1>
 <h3>求解线性方程组：</h3>
